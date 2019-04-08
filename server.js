@@ -10,7 +10,7 @@ var port = process.argv[2]
 
 if(!port){
 
-  console.log('ÇëÖ¸¶¨¶Ë¿ÚºÅºÃ²»À²£¿\nnode server.js 8888 ÕâÑù²»»áÂğ£¿')
+  console.log('è¯·æŒ‡å®šç«¯å£å·å¥½ä¸å•¦ï¼Ÿ\nnode server.js 8888 è¿™æ ·ä¸ä¼šå—ï¼Ÿ')
 
   process.exit(1)
 
@@ -36,39 +36,37 @@ var server = http.createServer(function(request, response){
 
 
 
-  /******** ´ÓÕâÀï¿ªÊ¼¿´£¬ÉÏÃæ²»Òª¿´ ************/
+  /******** ä»è¿™é‡Œå¼€å§‹çœ‹ï¼Œä¸Šé¢ä¸è¦çœ‹ ************/
 
 
 
-  console.log('·½·½Ëµ£ºº¬²éÑ¯×Ö·û´®µÄÂ·¾¶\n' + pathWithQuery)
-
-
-
-  if(path === '/'){
-
-    response.statusCode = 200
-
-    response.setHeader('Content-Type', 'text/html;charset=utf-8')
-
-    response.write('¹ş¹ş¹ş')
-
+ if(path == '/style.css'){
+    response.setHeader('Content-Type', 'text/css; charset=utf-8')
+    response.write('body{background-color: #ddd;}h1{color: red;}')
     response.end()
-
+  }else if(path == '/main.js'){
+    response.setHeader('Content-Type', 'text/javascript; charset=utf-8')
+    response.write('alert("JSæ‰§è¡Œ")')
+    response.end()
+  }else if(path == '/'){
+    response.setHeader('Content-Type', 'text/html; charset=utf-8')
+    response.write(
+      '<!DOCTYPE>\n<html>'  + 
+      '<head><link rel="stylesheet" href="/style.js">' +
+      '</head><body>'  +
+      '<h1>htmlå†…å®¹</h1>' +
+      '<script src="/script.html"></script>' +
+      '</body></html>')
+    response.end()
   }else{
-
     response.statusCode = 404
-
-    response.setHeader('Content-Type', 'text/html;charset=utf-8')
-
-    response.write('ÎØÎØÎØ')
-
     response.end()
-
   }
 
 
 
-  /******** ´úÂë½áÊø£¬ÏÂÃæ²»Òª¿´ ************/
+
+  /******** ä»£ç ç»“æŸï¼Œä¸‹é¢ä¸è¦çœ‹ ************/
 
 })
 
@@ -76,4 +74,4 @@ var server = http.createServer(function(request, response){
 
 server.listen(port)
 
-console.log('¼àÌı ' + port + ' ³É¹¦\nÇëÓÃÔÚ¿ÕÖĞ×ªÌå720¶ÈÈ»ºóÓÃµç·¹ìÒ´ò¿ª http://localhost:' + port)
+console.log('ç›‘å¬ ' + port + ' æˆåŠŸ\nè¯·ç”¨åœ¨ç©ºä¸­è½¬ä½“720åº¦ç„¶åç”¨ç”µé¥­ç…²æ‰“å¼€ http://localhost:' + port)
